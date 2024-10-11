@@ -10,7 +10,10 @@ apt-get install -y apt-transport-https ca-certificates curl software-properties-
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 apt-get update
-apt-get install -y docker-ce
+apt-get install -y docker-ce=5:25.0.1-1~ubuntu.20.04~focal
+
+
+
 
 # 启动 Docker 服务
 systemctl restart docker
@@ -21,13 +24,21 @@ echo "正在运行 Portainer..."
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data outlovecn/portainer-cn:latest
 
 
-docker run --restart=always  -tid --name baota --net=host --privileged=true --shm-size=1g --restart always -v ~/wwwroot:/www/wwwroot pch18/baota
+docker run -itd -v /www:/www --net=host --restart=always \
+--name baota cyberbolt/baota \
+-port 58888 -username baotawocaca -password baota150123@
 
 docker run --restart=always  -d -p 51984:1984 oddrationale/docker-shadowsocks -s 0.0.0.0 -p 1984 -k 111222 -m aes-256-cfb
 
 docker run --restart=always --network host -d --name frps snowdreamtech/frps
 
-
+docker run -itd --name=lookbusy --restart=always \
+    -e TZ=Asia/Shanghai \
+    -e CPU_UTIL=10-20 \
+    -e CPU_CORE=1 \
+    -e MEM_UTIL=15 \
+    -e SPEEDTEST_INTERVAL=120 \
+    fogforest/lookbusy
 
 
 
