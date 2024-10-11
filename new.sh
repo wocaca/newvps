@@ -13,7 +13,7 @@ apt-get update
 apt-get install -y docker-ce
 
 # 启动 Docker 服务
-systemctl start docker
+systemctl restart docker
 systemctl enable docker
 
 # 运行 Portainer
