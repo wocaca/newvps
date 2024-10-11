@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # 更新软件
+
+sudo iptables -F
 echo "正在更新系统..."
 apt-get update && apt-get upgrade -y
 
@@ -24,9 +26,9 @@ echo "正在运行 Portainer..."
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data outlovecn/portainer-cn:latest
 
 
-docker run -itd -v /www:/www --net=host --restart=always \
---name baota cyberbolt/baota \
--port 58888 -username baotawocaca -password baota150123@
+docker run -itd --net=host --restart=always \
+--name baota1 cyberbolt/baota \
+-port 58888 -username baotawocaca -password baota150123
 
 docker run --restart=always  -d -p 51984:1984 oddrationale/docker-shadowsocks -s 0.0.0.0 -p 1984 -k 111222 -m aes-256-cfb
 
@@ -45,3 +47,6 @@ docker run -itd --name=lookbusy --restart=always \
 
 
 echo "设置完成！"
+
+
+
