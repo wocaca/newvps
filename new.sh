@@ -20,4 +20,17 @@ systemctl enable docker
 echo "正在运行 Portainer..."
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data outlovecn/portainer-cn:latest
 
+
+docker run --restart=always  -tid --name baota --net=host --privileged=true --shm-size=1g --restart always -v ~/wwwroot:/www/wwwroot pch18/baota
+
+docker run --restart=always  -d -p 51984:1984 oddrationale/docker-shadowsocks -s 0.0.0.0 -p 1984 -k 111222 -m aes-256-cfb
+
+docker run --restart=always --network host -d --name frps snowdreamtech/frps
+
+
+
+
+
+
+
 echo "设置完成！"
